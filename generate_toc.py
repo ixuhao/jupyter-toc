@@ -1,3 +1,4 @@
+# coding: utf-8
 #!/usr/bin/env python3.5
 
 import sys
@@ -15,14 +16,14 @@ def main():
                                  ' '.join(s.split(' ')[1:]),
                                  '-'.join(s.split(' ')[1:]),
                                  '*' if args.bullet else '{}.'.format(i + 1))
-                            for i, s in enumerate(item for sublist in
+                            for i, s in enumerate(item.encode('utf-8') for sublist in
                                 [[re.sub('\n', '', line) for line in cell['source'] if line.startswith('#')]
                                   for cell in json.loads(notebook_file.read())['cells']
                                   if cell['cell_type'] == 'markdown'] for item in sublist))
         print('-' * len(filename))
         print(filename)
         print('# Table of Contents')
-        print(sections)
+        print(sections.decode('utf-8'))
         print('-' * len(filename))
 
 
